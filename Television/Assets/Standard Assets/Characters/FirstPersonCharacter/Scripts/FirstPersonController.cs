@@ -83,6 +83,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
             m_PreviouslyGrounded = m_CharacterController.isGrounded;
         }
 
+        public void SetRotation(Transform other)
+        {
+            m_MouseLook.Init(other, m_Camera.transform);
+        }
 
         private void PlayLandingSound()
         {

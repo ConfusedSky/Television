@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 5e3d1f5858043c844914cc8d3d52985b
+timeCreated: 1516492542
+licenseType: Free
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - mesh: {fileID: 4300000, guid: 7ab03e72a8b3a8d4db02e4d8a68514e9, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
