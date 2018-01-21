@@ -15,6 +15,7 @@ public class PathFolower : MonoBehaviour
 
     private bool move = false;
     private bool exited = false;
+    private float rotationSpeed = 0f;
 
     void FixedUpdate()
     {
@@ -22,6 +23,7 @@ public class PathFolower : MonoBehaviour
         if (move)
         {
             Vector3 newPosition = Vector3.MoveTowards(transform.position, target.transform.position, speed * Time.deltaTime);
+            Quaternion newRotation = Quaternion.RotateTowards(transform.rotation, target.transform.rotation, rotationSpeed * Time.deltaTime);
 
             if (player)
             {
@@ -33,16 +35,21 @@ public class PathFolower : MonoBehaviour
             }
 
             transform.position = newPosition;
+            transform.rotation = newRotation;
         }
 
         if(Vector3.Distance(target.transform.position, transform.position) < sensitivity )
         {
+            int startingIndex = index;
             index++;
 
             if(index >= path.Length)
             {
                 index = 0;
             }
+
+            float distance = (path[index].transform.position - path[startingIndex].transform.position).magnitude / speed;
+            rotationSpeed = Mathf.Abs(path[index].transform.rotation.eulerAngles.y - path[startingIndex].transform.rotation.eulerAngles.y)/distance;
         }
     }
 
@@ -67,7 +74,7 @@ public class PathFolower : MonoBehaviour
     {
         foreach (GameObject g in path)
         {
-            Gizmos.matrix = Matrix4x4.TRS(g.transform.position, g.transform.rotation, g.transform.lossyScale);
+            Gizmos.matrix = g.transform.localToWorldMatrix;
             Gizmos.DrawWireCube(new Vector3(), gameObject.transform.localScale);
         }
     }
