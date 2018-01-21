@@ -22,9 +22,7 @@ public class PathFolower : MonoBehaviour
             Vector3 newPosition = Vector3.MoveTowards(transform.position, target.transform.position, speed * Time.deltaTime);
 
             if (player)
-            {
-               player.transform.position += newPosition - transform.position;
-            }
+                player.transform.position += newPosition - transform.position;
 
             transform.position = newPosition;
         }
@@ -48,5 +46,10 @@ public class PathFolower : MonoBehaviour
             player = c.gameObject;
             move = true;
         }
+    }
+
+    void OnTriggerExit(Collider c)
+    {
+        player = null;
     }
 }
