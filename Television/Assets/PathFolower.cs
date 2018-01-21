@@ -11,8 +11,10 @@ public class PathFolower : MonoBehaviour
 
     private int index = 0;
     GameObject player = null;
+    CharacterController cc = null;
 
     private bool move = false;
+    private bool exited = false;
 
     void FixedUpdate()
     {
@@ -22,7 +24,13 @@ public class PathFolower : MonoBehaviour
             Vector3 newPosition = Vector3.MoveTowards(transform.position, target.transform.position, speed * Time.deltaTime);
 
             if (player)
+            {
                 player.transform.position += newPosition - transform.position;
+                if(exited && cc.isGrounded)
+                {
+                    player = null;
+                }
+            }
 
             transform.position = newPosition;
         }
@@ -44,12 +52,23 @@ public class PathFolower : MonoBehaviour
         if( c.gameObject.tag == "Player")
         {
             player = c.gameObject;
+            cc = player.GetComponent<CharacterController>();
             move = true;
+            exited = false;
         }
     }
 
     void OnTriggerExit(Collider c)
     {
-        player = null;
+        exited = true;
+    }
+
+    void OnDrawGizmos()
+    {
+        foreach (GameObject g in path)
+        {
+            Gizmos.matrix = Matrix4x4.TRS(g.transform.position, g.transform.rotation, g.transform.lossyScale);
+            Gizmos.DrawWireCube(new Vector3(), gameObject.transform.localScale);
+        }
     }
 }
