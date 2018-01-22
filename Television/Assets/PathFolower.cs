@@ -9,11 +9,11 @@ public class PathFolower : MonoBehaviour
     public float speed = 10;
     public float sensitivity = .01f;
 
-    private int index = 0;
+    public int index = 0;
     GameObject player = null;
     CharacterController cc = null;
 
-    private bool move = false;
+    public bool move = false;
     private bool exited = false;
     private float rotationSpeed = 0f;
 
@@ -49,7 +49,7 @@ public class PathFolower : MonoBehaviour
             }
 
             float distance = (path[index].transform.position - path[startingIndex].transform.position).magnitude / speed;
-            rotationSpeed = Mathf.Abs(path[index].transform.rotation.eulerAngles.y - path[startingIndex].transform.rotation.eulerAngles.y)/distance;
+            rotationSpeed = Mathf.Abs(Mathf.Abs(path[index].transform.rotation.eulerAngles.y - path[startingIndex].transform.rotation.eulerAngles.y)-180)/distance;
         }
     }
 
