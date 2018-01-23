@@ -17,6 +17,9 @@ public class PathFolower : MonoBehaviour
     private bool exited = false;
     private float rotationSpeed = 0f;
 
+    public bool triggerOther = false;
+    public PathFolower[] others;
+
     void FixedUpdate()
     {
         GameObject target = path[index];
@@ -62,6 +65,13 @@ public class PathFolower : MonoBehaviour
             cc = player.GetComponent<CharacterController>();
             move = true;
             exited = false;
+        }
+        if(triggerOther)
+        {
+            foreach(PathFolower pf in others)
+            {
+                pf.move = true;
+            }
         }
     }
 
