@@ -6,6 +6,7 @@
 /Television/Assets/AssetStoreTools*
 /Television/*.sln
 /Television/*.csproj
+Build*
 
 *obj*
 *bin*

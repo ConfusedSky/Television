@@ -10,6 +10,10 @@ public class Failure : MonoBehaviour
             CheckpointManager.UpdateCheckpoint((new GameObject()).transform);
             Fail();
         }
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
     }
 
 	public void Fail()
