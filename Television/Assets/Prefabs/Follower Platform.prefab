@@ -587,7 +587,7 @@ MonoBehaviour:
   - {fileID: 0}
   speed: 10
   sensitivity: 0.01
-  index: 2
+  index: 0
   move: 0
   triggerOther: 0
   others: []
