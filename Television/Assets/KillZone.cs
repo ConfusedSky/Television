@@ -6,6 +6,7 @@ using UnityEngine;
 public class KillZone : MonoBehaviour
 {
     public Failure failure;
+    public AudioClip siren;
     private BoxCollider c;
 
     void Start()
@@ -23,6 +24,9 @@ public class KillZone : MonoBehaviour
 
     void OnTriggerEnter()
     {
+        AudioSource source = GetComponent<AudioSource>();
+        source.clip = siren;
+        source.Play();
         failure.Fail();
     }
 }

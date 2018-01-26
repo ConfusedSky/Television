@@ -21,7 +21,7 @@ public class DeadZone : MonoBehaviour {
 	{
 		if (player.transform.position.y <= deadzone)
 		{
-			failure.Fail ();
+			failure.FailImmediate ();
 		}
 	}
 }

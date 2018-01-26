@@ -3,12 +3,15 @@ using UnityEngine.SceneManagement;
 
 public class Failure : MonoBehaviour
 {
+    public Fade fade;
+
     public void Update()
     {
         if(Input.GetKeyDown(KeyCode.R))
         {
+            // Automatically deletes itself because scene is reinitialized
             CheckpointManager.UpdateCheckpoint((new GameObject()).transform);
-            Fail();
+            FailImmediate();
         }
         if(Input.GetKeyDown(KeyCode.Escape))
         {
@@ -16,8 +19,19 @@ public class Failure : MonoBehaviour
         }
     }
 
+    public void FailImmediate()
+    {
+        Reload();
+    }
+
 	public void Fail()
 	{
-        SceneManager.LoadScene (SceneManager.GetActiveScene ().buildIndex, LoadSceneMode.Single);
+        fade.fadeSpeed = .15f;
+        fade.FadeOut(Reload);
 	}
+
+    public void Reload()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex, LoadSceneMode.Single);
+    }
 }
