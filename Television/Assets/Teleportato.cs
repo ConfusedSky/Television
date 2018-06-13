@@ -24,10 +24,16 @@ public class Teleportato : MonoBehaviour {
         {
             destinationCamera.transform.localPosition = distance;
             destinationCamera.gameObject.SetActive(true); 
-            Quaternion rot = Quaternion.Inverse(transform.rotation) *
-                playerCamera.transform.rotation;
-            Quaternion end = rot * target.transform.rotation;
-            destinationCamera.transform.rotation = end;
+            //float angle = Quaternion.Angle(target.transform.rotation,
+                    //transform.rotation );
+            //Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.up);
+            Quaternion rotation = 
+                Quaternion.Inverse(transform.rotation) *
+                target.transform.rotation;
+            Vector3 direction = rotation *
+                playerCamera.transform.forward;
+            destinationCamera.transform.rotation = 
+                Quaternion.LookRotation(direction, Vector3.up);
         }
         else
         {
@@ -39,7 +45,10 @@ public class Teleportato : MonoBehaviour {
     {
         Debug.Log("Should be teleporting");
         GameObject teleportee = collider.gameObject;
-        teleportee.transform.position = target.transform.position;
+        Vector3 offset = teleportee.transform.position -
+            transform.position;
+        teleportee.transform.position = target.transform.position +
+            offset;
         //teleportee.transform.rotation = target.transform.rotation;
 
         if(teleportee.tag == "Player")
